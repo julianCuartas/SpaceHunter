@@ -1,0 +1,246 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Sprites/Fondo/Interfaz1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Fondo/Interfaz5.png" type="Texture" id=2]
+[ext_resource path="res://Tutorial.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Pantalla/interfaz3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/teclado.jpg" type="Texture" id=5]
+[ext_resource path="res://Sprites/rect24535.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/image451.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Cursor.gd" type="Script" id=8]
+[ext_resource path="res://Fuentes/Pokemon X and Y.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scripts/Verde.gd" type="Script" id=10]
+[ext_resource path="res://Sonidos/MusicaInicioRecortada.wav" type="AudioStream" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Planeta1Mov"
+length = 300.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 299.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 882.907, 186.023 ), Vector2( 882.907, 878.98 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Movimiento"
+length = 250.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 249.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 118, 294.56 ), Vector2( 118, 903.247 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 43.3295, 131.243 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 75.2303, 298.442 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 25
+font_data = ExtResource( 9 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Intermi"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2, 1.5, 2.6, 3, 3.9, 4.3, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false ]
+}
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 143.23, 430.43 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 41.6901, 52.9459 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Fondo" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Fondo"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fondo/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 600 )
+
+[node name="FondoEstrellas" type="Sprite" parent="Fondo/ParallaxBackground/ParallaxLayer"]
+position = Vector2( -975.682, 372.514 )
+scale = Vector2( 0.537147, 0.552761 )
+texture = ExtResource( 2 )
+offset = Vector2( 2769.47, -140.157 )
+
+[node name="Planeta1Node" type="Node2D" parent="Fondo"]
+
+[node name="Planeta1" type="Sprite" parent="Fondo/Planeta1Node"]
+position = Vector2( 882.907, 878.98 )
+scale = Vector2( 0.431497, 0.431497 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 1440.43, 12.7985, 802.922, 810.533 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fondo/Planeta1Node/Planeta1"]
+autoplay = "Planeta1Mov"
+anims/Planeta1Mov = SubResource( 1 )
+
+[node name="Planera2Node" type="Node2D" parent="Fondo"]
+
+[node name="Planeta2" type="Sprite" parent="Fondo/Planera2Node"]
+position = Vector2( 118, 301.262 )
+scale = Vector2( 0.423277, 0.423277 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 83.4423, 681.112, 485.057, 463.627 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fondo/Planera2Node/Planeta2"]
+autoplay = "Movimiento"
+anims/Movimiento = SubResource( 2 )
+
+[node name="Limites" type="Node2D" parent="."]
+
+[node name="Izquierdo" type="StaticBody2D" parent="Limites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites/Izquierdo"]
+position = Vector2( -28.8237, 491.355 )
+shape = SubResource( 4 )
+
+[node name="Derecho" type="StaticBody2D" parent="Limites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites/Derecho"]
+position = Vector2( 1044.47, 486.016 )
+shape = SubResource( 4 )
+
+[node name="Interfaz" type="Node2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="Interfaz"]
+position = Vector2( 442.502, 282.992 )
+scale = Vector2( 0.52406, 0.52406 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 10.8604, 8.0933, 1743.86, 1083.71 )
+
+[node name="teclado" type="Sprite" parent="Interfaz"]
+position = Vector2( 64.2005, 393.182 )
+scale = Vector2( 0.836364, 0.836364 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 38.1654, 22.7717, 56.5215, 55.6452 )
+
+[node name="teclado2" type="Sprite" parent="Interfaz"]
+position = Vector2( 145.804, 392.208 )
+scale = Vector2( 0.863311, 0.863311 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 238.497, 24.2618, 56.4677, 53.3876 )
+
+[node name="teclado3" type="Sprite" parent="Interfaz"]
+position = Vector2( 303.036, 391.193 )
+scale = Vector2( 0.636884, 0.636884 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 444.25, 90.25, 322, 55 )
+
+[node name="ColorRect" type="ColorRect" parent="Interfaz"]
+margin_left = 871.0
+margin_top = -2.0
+margin_right = 1032.0
+margin_bottom = 596.0
+color = Color( 0.643137, 0.0431373, 0.0431373, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="Interfaz/ColorRect"]
+position = Vector2( -871, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interfaz/ColorRect/Area2D"]
+position = Vector2( 945.6, 304 )
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="Interfaz"]
+margin_left = 876.481
+margin_top = 200.919
+margin_right = 1021.48
+margin_bottom = 377.919
+custom_fonts/font = SubResource( 6 )
+text = "Para continuar
+
+Coloca el 
+cursor en esta 
+zona"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interfaz"]
+autoplay = "Intermi"
+anims/Intermi = SubResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="Interfaz"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interfaz/Area2D"]
+position = Vector2( 710.835, 375.542 )
+shape = SubResource( 8 )
+
+[node name="Mov" type="Node2D" parent="."]
+
+[node name="Recta" type="Sprite" parent="Mov"]
+light_mask = 16
+position = Vector2( 511.437, 551.019 )
+scale = Vector2( 0.559937, 0.330122 )
+texture = ExtResource( 6 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Mov"]
+position = Vector2( 498.622, 543.947 )
+scale = Vector2( 0.483171, 0.483171 )
+script = ExtResource( 8 )
+speed = 700
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mov/KinematicBody2D"]
+position = Vector2( 0.690674, 0 )
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Mov/KinematicBody2D" groups=["Cursor"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mov/KinematicBody2D/Area2D"]
+position = Vector2( 1.38135, 0 )
+shape = SubResource( 3 )
+
+[node name="Cursor" type="Sprite" parent="Mov/KinematicBody2D"]
+position = Vector2( 0, -4.13928 )
+texture = ExtResource( 7 )
+
+[node name="MusicaTuto" type="Node2D" parent="."]
+
+[node name="Musicatuto" type="AudioStreamPlayer2D" parent="MusicaTuto"]
+position = Vector2( 471.458, 11.1118 )
+stream = ExtResource( 11 )
+
+[connection signal="area_entered" from="Interfaz/ColorRect/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Interfaz/Area2D" to="Interfaz" method="_on_Area2D_area_entered"]

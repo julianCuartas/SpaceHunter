@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Asteroide/CelestialObjects.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/OstilAsteroide.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Anim/asteroide.tres" type="SpriteFrames" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "objetos"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -44 ), Vector2( 0, 648 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 27.5, 25.5 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Asteroide" type="Node2D" parent="."]
+position = Vector2( 0, -44 )
+scale = Vector2( 1.62996, 1.62996 )
+
+[node name="CelestialObjects2" type="Sprite" parent="Asteroide"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.320469, 223.919, 33.7536, 32.0543 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Asteroide"]
+autoplay = "objetos"
+anims/objetos = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Asteroide" groups=["Asteroide", "Ostil"]]
+position = Vector2( -0.603336, -0.920612 )
+scale = Vector2( 0.613512, 0.613512 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Area2D"]
+shape = SubResource( 2 )
+
+[node name="Explosion" type="AnimatedSprite" parent="Asteroide"]
+position = Vector2( 0.335384, -0.900786 )
+scale = Vector2( 1.98514, 1.98514 )
+frames = ExtResource( 3 )
+
+[connection signal="area_entered" from="Asteroide/Area2D" to="." method="_on_Area2D_area_entered"]

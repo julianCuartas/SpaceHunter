@@ -1,0 +1,304 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Sprites/Fondo/Interfaz1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Fondo/Interfaz5.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/image451.png" type="Texture" id=3]
+[ext_resource path="res://Fuentes/Pokemon X and Y.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Sprites/rect24535.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Cursor.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/BotonReintentar.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/BotonVolver.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Perder.gd" type="Script" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Planeta1Mov"
+length = 300.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 299.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 882.907, 186.023 ), Vector2( 882.907, 878.98 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Movimiento"
+length = 250.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 249.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 118, 294.56 ), Vector2( 118, 903.247 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 215.659, 40.4094 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 217.379, 32.54 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 21, 27 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 21.6348, 30.9037 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 43.3295, 131.243 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 56.1231, 46.9578 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="Fondo" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Fondo"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fondo/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 600 )
+
+[node name="FondoEstrellas" type="Sprite" parent="Fondo/ParallaxBackground/ParallaxLayer"]
+position = Vector2( -975.682, 372.514 )
+scale = Vector2( 0.537147, 0.552761 )
+texture = ExtResource( 2 )
+offset = Vector2( 2769.47, -140.157 )
+
+[node name="Planeta1Node" type="Node2D" parent="."]
+
+[node name="Planeta1" type="Sprite" parent="Planeta1Node"]
+position = Vector2( 882.907, 878.98 )
+scale = Vector2( 0.431497, 0.431497 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 1440.43, 12.7985, 802.922, 810.533 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Planeta1Node/Planeta1"]
+autoplay = "Planeta1Mov"
+anims/Planeta1Mov = SubResource( 1 )
+
+[node name="Planera2Node" type="Node2D" parent="."]
+
+[node name="Planeta2" type="Sprite" parent="Planera2Node"]
+position = Vector2( 118, 301.262 )
+scale = Vector2( 0.423277, 0.423277 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 83.4423, 681.112, 485.057, 463.627 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Planera2Node/Planeta2"]
+autoplay = "Movimiento"
+anims/Movimiento = SubResource( 2 )
+
+[node name="Inter" type="Node2D" parent="."]
+
+[node name="Perdiste" type="Label" parent="Inter"]
+margin_left = 391.077
+margin_top = 31.2592
+margin_right = 660.077
+margin_bottom = 145.259
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Perdiste"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Puntaje" type="Label" parent="Inter"]
+margin_left = 352.226
+margin_top = 159.684
+margin_right = 489.226
+margin_bottom = 218.684
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Puntaje:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PuntajeResul" type="Label" parent="Inter"]
+margin_left = 497.31
+margin_top = 163.277
+margin_right = 520.31
+margin_bottom = 215.277
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MayorPuntajeResul" type="Label" parent="Inter"]
+margin_left = 503.119
+margin_top = 240.953
+margin_right = 523.119
+margin_bottom = 299.953
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MayorPuntaje" type="Label" parent="Inter"]
+margin_left = 262.962
+margin_top = 238.062
+margin_right = 496.962
+margin_bottom = 297.062
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Mayor puntaje:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Botones" type="Node2D" parent="."]
+
+[node name="BotonReintentar" type="Node2D" parent="Botones"]
+script = ExtResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="Botones/BotonReintentar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Botones/BotonReintentar/Area2D"]
+position = Vector2( 232.092, 538.378 )
+shape = SubResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="Botones/BotonReintentar"]
+margin_left = 36.0
+margin_top = 391.0
+margin_right = 475.0
+margin_bottom = 529.0
+color = Color( 0.0784314, 0.0784314, 0.0784314, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reintentar" type="Label" parent="Botones/BotonReintentar"]
+margin_left = 178.53
+margin_top = 429.983
+margin_right = 341.53
+margin_bottom = 488.983
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Reintentar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pulsa" type="Sprite" parent="Botones/BotonReintentar"]
+visible = false
+position = Vector2( 62.0374, 417.721 )
+scale = Vector2( 0.494214, 0.494214 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 2134.2, 1005.18, 98.219, 92.3463 )
+
+[node name="BotonVolver" type="Node2D" parent="Botones"]
+script = ExtResource( 8 )
+
+[node name="ColorRect2" type="ColorRect" parent="Botones/BotonVolver"]
+margin_left = 544.286
+margin_top = 390.106
+margin_right = 983.286
+margin_bottom = 528.106
+color = Color( 0.0784314, 0.0784314, 0.0784314, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pulsa2" type="Sprite" parent="Botones/BotonVolver"]
+visible = false
+position = Vector2( 569.244, 414.14 )
+scale = Vector2( 0.494214, 0.494214 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 2134.2, 1005.18, 98.219, 92.3463 )
+
+[node name="VolverMenu" type="Label" parent="Botones/BotonVolver"]
+margin_left = 662.832
+margin_top = 432.344
+margin_right = 872.832
+margin_bottom = 491.344
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Volver al inicio"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="Botones/BotonVolver"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Botones/BotonVolver/Area2D"]
+position = Vector2( 794.31, 543.937 )
+shape = SubResource( 6 )
+
+[node name="Recta" type="Sprite" parent="Botones"]
+light_mask = 16
+position = Vector2( 511.437, 551.019 )
+scale = Vector2( 0.559937, 0.330122 )
+texture = ExtResource( 5 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Botones"]
+script = ExtResource( 6 )
+speed = 700
+
+[node name="Cursor" type="Sprite" parent="Botones/KinematicBody2D"]
+position = Vector2( 508.499, 543.016 )
+scale = Vector2( 0.483171, 0.483171 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Botones/KinematicBody2D"]
+position = Vector2( 509.5, 544 )
+shape = SubResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="Botones/KinematicBody2D" groups=["Cursor"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Botones/KinematicBody2D/Area2D"]
+position = Vector2( 510.564, 547.551 )
+shape = SubResource( 10 )
+
+[node name="Limites" type="Node2D" parent="."]
+
+[node name="Izquierdo" type="StaticBody2D" parent="Limites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites/Izquierdo"]
+position = Vector2( -28.8237, 491.355 )
+shape = SubResource( 8 )
+
+[node name="Derecho" type="StaticBody2D" parent="Limites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites/Derecho"]
+position = Vector2( 1044.47, 486.016 )
+shape = SubResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 510.603, 550.79 )
+shape = SubResource( 7 )
+
+[connection signal="area_entered" from="Botones/BotonReintentar/Area2D" to="Botones/BotonReintentar" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Botones/BotonVolver/Area2D" to="Botones/BotonVolver" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

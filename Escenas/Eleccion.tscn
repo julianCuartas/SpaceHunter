@@ -1,0 +1,265 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Sprites/Fondo/Interfaz1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Fondo/Interfaz5.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/SpriteNave/Ship 3 (2).png" type="Texture" id=3]
+[ext_resource path="res://Sprites/SpriteNave/Nave2/Enemy 10 Blue (2).png" type="Texture" id=4]
+[ext_resource path="res://Scripts/seleccion1.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/rect24535.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/image451.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Cursor.gd" type="Script" id=8]
+[ext_resource path="res://Fuentes/Pokemon X and Y.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scripts/seleccion2.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Eleccion.gd" type="Script" id=11]
+[ext_resource path="res://Sonidos/MusicaInicioRecortada.wav" type="AudioStream" id=12]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Planeta1Mov"
+length = 300.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 299.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 882.907, 186.023 ), Vector2( 882.907, 878.98 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Movimiento"
+length = 250.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 249.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 118, 294.56 ), Vector2( 118, 903.247 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 43.3295, 131.243 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 9 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 41.6901, 52.9459 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 15.1904, 10 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 14.8843, 10 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 52.278, 64.9665 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 11 )
+
+[node name="Fondo" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Fondo"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fondo/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 600 )
+
+[node name="FondoEstrellas" type="Sprite" parent="Fondo/ParallaxBackground/ParallaxLayer"]
+position = Vector2( -975.682, 372.514 )
+scale = Vector2( 0.537147, 0.552761 )
+texture = ExtResource( 2 )
+offset = Vector2( 2769.47, -140.157 )
+
+[node name="Planeta1Node" type="Node2D" parent="Fondo"]
+
+[node name="Planeta1" type="Sprite" parent="Fondo/Planeta1Node"]
+position = Vector2( 882.907, 878.98 )
+scale = Vector2( 0.431497, 0.431497 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 1440.43, 12.7985, 802.922, 810.533 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fondo/Planeta1Node/Planeta1"]
+autoplay = "Planeta1Mov"
+anims/Planeta1Mov = SubResource( 1 )
+
+[node name="Planera2Node" type="Node2D" parent="Fondo"]
+
+[node name="Planeta2" type="Sprite" parent="Fondo/Planera2Node"]
+position = Vector2( 118, 301.262 )
+scale = Vector2( 0.423277, 0.423277 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 83.4423, 681.112, 485.057, 463.627 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fondo/Planera2Node/Planeta2"]
+autoplay = "Movimiento"
+anims/Movimiento = SubResource( 2 )
+
+[node name="Limites" type="Node2D" parent="."]
+
+[node name="Izquierdo" type="StaticBody2D" parent="Limites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites/Izquierdo"]
+position = Vector2( -28.8237, 491.355 )
+shape = SubResource( 3 )
+
+[node name="Derecho" type="StaticBody2D" parent="Limites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites/Derecho"]
+position = Vector2( 1044.47, 486.016 )
+shape = SubResource( 3 )
+
+[node name="Interfaz" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="Interfaz"]
+margin_left = 253.325
+margin_top = 12.0626
+margin_right = 804.325
+margin_bottom = 92.0626
+custom_fonts/font = SubResource( 5 )
+text = "Selecciona una nave espacial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mov" type="Node2D" parent="."]
+
+[node name="Recta" type="Sprite" parent="Mov"]
+light_mask = 16
+position = Vector2( 511.437, 551.019 )
+scale = Vector2( 0.559937, 0.330122 )
+texture = ExtResource( 6 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Mov"]
+position = Vector2( 498.622, 543.947 )
+scale = Vector2( 0.483171, 0.483171 )
+script = ExtResource( 8 )
+speed = 700
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mov/KinematicBody2D"]
+position = Vector2( 0.690674, 0 )
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="Mov/KinematicBody2D" groups=["Cursor"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mov/KinematicBody2D/Area2D"]
+position = Vector2( 1.38135, 0 )
+shape = SubResource( 4 )
+
+[node name="Cursor" type="Sprite" parent="Mov/KinematicBody2D"]
+position = Vector2( 0, -4.13928 )
+texture = ExtResource( 7 )
+
+[node name="Naves" type="Node2D" parent="."]
+
+[node name="Nave1" type="Node2D" parent="Naves"]
+script = ExtResource( 5 )
+
+[node name="ColorRect2" type="ColorRect" parent="Naves/Nave1"]
+margin_left = 563.497
+margin_top = 136.74
+margin_right = 895.497
+margin_bottom = 468.74
+rect_pivot_offset = Vector2( 414.982, 309.827 )
+color = Color( 0.0784314, 0.0784314, 0.0784314, 0.835294 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ship 3 (2)" type="Sprite" parent="Naves/Nave1"]
+position = Vector2( 727.516, 308.918 )
+scale = Vector2( 10.6594, 10.6594 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Naves/Nave1/Ship 3 (2)"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Naves/Nave1/Ship 3 (2)/Area2D"]
+position = Vector2( 0, 19.323 )
+shape = SubResource( 6 )
+
+[node name="Pulsa2" type="Sprite" parent="Naves/Nave1"]
+visible = false
+position = Vector2( 608.154, 180.036 )
+scale = Vector2( 0.581269, 0.581269 )
+texture = ExtResource( 1 )
+offset = Vector2( -3.05176e-05, 0 )
+region_enabled = true
+region_rect = Rect2( 2134.2, 1005.18, 98.219, 92.3463 )
+
+[node name="Nave2" type="Node2D" parent="Naves"]
+script = ExtResource( 10 )
+
+[node name="ColorRect" type="ColorRect" parent="Naves/Nave2"]
+margin_left = 123.0
+margin_top = 138.0
+margin_right = 455.0
+margin_bottom = 470.0
+rect_pivot_offset = Vector2( 414.982, 309.827 )
+color = Color( 0.0784314, 0.0784314, 0.0784314, 0.835294 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemy 10 Blue (2)" type="Sprite" parent="Naves/Nave2"]
+position = Vector2( 286.366, 308.918 )
+rotation = -3.14159
+scale = Vector2( 10.659, 10.659 )
+texture = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="Naves/Nave2/Enemy 10 Blue (2)"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Naves/Nave2/Enemy 10 Blue (2)/Area2D"]
+position = Vector2( -0.335638, -19.3237 )
+shape = SubResource( 7 )
+
+[node name="Pulsa" type="Sprite" parent="Naves/Nave2"]
+visible = false
+position = Vector2( 164.55, 177.075 )
+scale = Vector2( 0.581269, 0.581269 )
+texture = ExtResource( 1 )
+offset = Vector2( -3.05176e-05, 0 )
+region_enabled = true
+region_rect = Rect2( 2134.2, 1005.18, 98.219, 92.3463 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 507.148, 560.097 )
+shape = SubResource( 8 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2( 70.7241, 560.097 )
+shape = SubResource( 8 )
+
+[node name="Area2D3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2( 947.559, 560.097 )
+shape = SubResource( 8 )
+
+[node name="MusicaTuto" type="Node2D" parent="."]
+
+[node name="Musicatuto" type="AudioStreamPlayer2D" parent="MusicaTuto"]
+position = Vector2( 519.398, 12.0626 )
+stream = ExtResource( 12 )
+
+[connection signal="area_entered" from="Naves/Nave1/Ship 3 (2)/Area2D" to="Naves/Nave1" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Naves/Nave2/Enemy 10 Blue (2)/Area2D" to="Naves/Nave2" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D2" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D3" to="." method="_on_Area2D_area_entered"]

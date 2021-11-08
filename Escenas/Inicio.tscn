@@ -1,0 +1,146 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Sprites/Fondo/Interfaz1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Fondo/Interfaz5.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/PantallaInicio.gd" type="Script" id=3]
+[ext_resource path="res://Fuentes/Pokemon X and Y.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Sprites/Tecla.png" type="Texture" id=5]
+[ext_resource path="res://Sonidos/MusicaInicio.wav" type="AudioStream" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Planeta1Mov"
+length = 300.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 299.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 882.907, 186.023 ), Vector2( 882.907, 878.98 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Movimiento"
+length = 250.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 249.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 118, 294.56 ), Vector2( 118, 903.247 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=4]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[node name="main" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Fondo" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Fondo"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fondo/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 600 )
+
+[node name="FondoEstrellas" type="Sprite" parent="Fondo/ParallaxBackground/ParallaxLayer"]
+position = Vector2( -975.682, 372.514 )
+scale = Vector2( 0.537147, 0.552761 )
+texture = ExtResource( 2 )
+offset = Vector2( 2769.47, -140.157 )
+
+[node name="TItulo" type="Sprite" parent="."]
+position = Vector2( 495.838, 297.02 )
+scale = Vector2( 0.542373, 0.542373 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 2041.42, 1462.72, 932.303, 551.77 )
+
+[node name="Planeta1Node" type="Node2D" parent="."]
+
+[node name="Planeta1" type="Sprite" parent="Planeta1Node"]
+position = Vector2( 882.907, 878.98 )
+scale = Vector2( 0.431497, 0.431497 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 1440.43, 12.7985, 802.922, 810.533 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Planeta1Node/Planeta1"]
+autoplay = "Planeta1Mov"
+anims/Planeta1Mov = SubResource( 1 )
+
+[node name="Planera2Node" type="Node2D" parent="."]
+
+[node name="Planeta2" type="Sprite" parent="Planera2Node"]
+position = Vector2( 118, 301.262 )
+scale = Vector2( 0.423277, 0.423277 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -213.413 )
+region_enabled = true
+region_rect = Rect2( 83.4423, 681.112, 485.057, 463.627 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Planera2Node/Planeta2"]
+autoplay = "Movimiento"
+anims/Movimiento = SubResource( 2 )
+
+[node name="PulsaANode" type="Node2D" parent="."]
+
+[node name="Label2" type="Label" parent="PulsaANode"]
+margin_left = 256.322
+margin_top = 426.469
+margin_right = 729.322
+margin_bottom = 491.469
+custom_fonts/font = SubResource( 3 )
+text = "Pulsa          ó                   para jugar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pulsa" type="Sprite" parent="PulsaANode"]
+position = Vector2( 373.168, 458.993 )
+scale = Vector2( 0.494214, 0.494214 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 2134.2, 1005.18, 98.219, 92.3463 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PulsaANode/Pulsa"]
+root_node = NodePath("../..")
+autoplay = "PrendeApaga"
+anims/PrendeApaga = SubResource( 4 )
+
+[node name="Tecla" type="Sprite" parent="PulsaANode"]
+position = Vector2( 493.928, 460.086 )
+scale = Vector2( 0.168862, 0.168862 )
+texture = ExtResource( 5 )
+
+[node name="musicaInicio" type="Node2D" parent="."]
+
+[node name="musicaInicio" type="AudioStreamPlayer2D" parent="musicaInicio"]
+position = Vector2( 496.359, 27.2089 )
+stream = ExtResource( 6 )
